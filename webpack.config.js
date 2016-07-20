@@ -1,8 +1,14 @@
+var path = require('path');
+
 module.exports = {
-    entry: './src/main.js',
+    resolveLoader: {
+      root: path.join(__dirname, 'node_modules')
+    },
+    entry: './src/main.tsx',
     output: {
-        path: './dist',
-        filename: './index.js'
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: "dist",
+        filename: 'index.js'
     },
     devServer: {
         inline: true,
@@ -10,13 +16,21 @@ module.exports = {
     },
     devtool: "source-map",
     resolve: {
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".css"]
     },
     module: {
         loaders: [
             {
                 test: /\.tsx?$/,
                 loader: "ts-loader"
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
             }
         ],
         preLoaders: [
@@ -25,5 +39,9 @@ module.exports = {
                 loader: "source-map-loader" 
             }
         ]
-    }
-}
+    },
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    },
+};
