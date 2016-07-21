@@ -7,11 +7,13 @@ import {browserHistory, Router, Route} from 'react-router';
 
 import {App} from './App';
 import {ClientComponent, clientReducer} from "./client/index";
+import {createStore} from "redux";
 
 const reducer = combineReducers({
     clientReducer
 });
 
+const store = createStore(reducer);
 
 ReactDOM.render((
     <Router>

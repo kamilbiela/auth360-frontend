@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+// props state
 export class ClientComponent extends React.Component<any, any> {
     render() {
         return (
